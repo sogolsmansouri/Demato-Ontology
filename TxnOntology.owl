@@ -1,13 +1,23 @@
-@prefix : <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#> .
+@prefix : <http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#> .
+@prefix DMO: <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix untitled-ontology-25: <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#> .
-@base <http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#> .
+@base <http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#> .
 
-<http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25> rdf:type owl:Ontology .
+<http://www.semanticweb.org/sogol/ontologies/2023/3/DMO> rdf:type owl:Ontology ;
+                                                          owl:versionIRI <http://www.semanticweb.org/sogol/ontologies/2023/3/DMO> .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
 
 #################################################################
 #    Object Properties
@@ -33,7 +43,16 @@ untitled-ontology-25:hasAsset rdf:type owl:ObjectProperty ;
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#hasInput
 untitled-ontology-25:hasInput rdf:type owl:ObjectProperty ;
-                              rdfs:domain untitled-ontology-25:MKTxn ;
+                              rdfs:domain untitled-ontology-25:MKTxn ,
+                                          [ owl:intersectionOf ( untitled-ontology-25:Create
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty untitled-ontology-25:hasInput ;
+                                                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                   owl:onClass untitled-ontology-25:TxnInput
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ;
                               rdfs:range untitled-ontology-25:TxnInput .
 
 
@@ -46,7 +65,15 @@ untitled-ontology-25:hasOutput rdf:type owl:ObjectProperty ;
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#hasSig
 untitled-ontology-25:hasSig rdf:type owl:ObjectProperty ,
                                      owl:FunctionalProperty ;
-                            rdfs:domain untitled-ontology-25:TxnInput ;
+                            rdfs:domain [ owl:intersectionOf ( untitled-ontology-25:TxnInput
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty untitled-ontology-25:hasSig ;
+                                                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                 owl:onClass untitled-ontology-25:Signature
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
                             rdfs:range untitled-ontology-25:Signature .
 
 
@@ -54,12 +81,6 @@ untitled-ontology-25:hasSig rdf:type owl:ObjectProperty ,
 untitled-ontology-25:hasSysAcc rdf:type owl:ObjectProperty ;
                                rdfs:domain untitled-ontology-25:PromiseTxn ;
                                rdfs:range untitled-ontology-25:SysAccount .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#hasSysAccount
-untitled-ontology-25:hasSysAccount rdf:type owl:ObjectProperty ;
-                                   rdfs:domain untitled-ontology-25:PromiseTxn ;
-                                   rdfs:range untitled-ontology-25:SysAccount .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#msgTxn
@@ -85,19 +106,41 @@ untitled-ontology-25:outputCond rdf:type owl:ObjectProperty ;
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#receiver
 untitled-ontology-25:receiver rdf:type owl:ObjectProperty ;
-                              rdfs:domain untitled-ontology-25:TxnOuput ;
+                              rdfs:domain [ owl:intersectionOf ( untitled-ontology-25:TxnOuput
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty untitled-ontology-25:receiver ;
+                                                                   owl:someValuesFrom untitled-ontology-25:Account
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ;
                               rdfs:range untitled-ontology-25:Account .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#refTxn
 untitled-ontology-25:refTxn rdf:type owl:ObjectProperty ;
-                            rdfs:domain untitled-ontology-25:MKTxn ;
+                            rdfs:domain untitled-ontology-25:MKTxn ,
+                                        [ owl:intersectionOf ( untitled-ontology-25:Buy
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty untitled-ontology-25:refTxn ;
+                                                                 owl:someValuesFrom untitled-ontology-25:Advertise
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
                             rdfs:range untitled-ontology-25:MKTxn .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#sender
 untitled-ontology-25:sender rdf:type owl:ObjectProperty ;
-                            rdfs:domain untitled-ontology-25:TxnInput ;
+                            rdfs:domain [ owl:intersectionOf ( untitled-ontology-25:TxnInput
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty untitled-ontology-25:sender ;
+                                                                 owl:someValuesFrom untitled-ontology-25:Account
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
                             rdfs:range untitled-ontology-25:Account .
 
 
@@ -120,64 +163,45 @@ untitled-ontology-25:spends rdf:type owl:ObjectProperty ;
                             rdfs:range untitled-ontology-25:TxnOuput .
 
 
-###  http://www.w3.org/2002/07/owl#topObjectProperty
-owl:topObjectProperty rdfs:domain untitled-ontology-25:MKTxn ;
-                      rdfs:range untitled-ontology-25:Asset .
-
-
 #################################################################
 #    Data properties
 #################################################################
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#assetId
 untitled-ontology-25:assetId rdf:type owl:DatatypeProperty ;
-                             rdfs:subPropertyOf untitled-ontology-25:dataEndurantFeature ;
+                             rdfs:subPropertyOf owl:topDataProperty ;
                              rdf:type owl:FunctionalProperty ;
-                             rdfs:domain untitled-ontology-25:Asset ;
-                             rdfs:range xsd:string .
+                             rdfs:range xsd:int .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#assetMetadata
 untitled-ontology-25:assetMetadata rdf:type owl:DatatypeProperty ;
-                                   rdfs:subPropertyOf untitled-ontology-25:dataPerdurantFeature ;
-                                   rdfs:domain untitled-ontology-25:Asset ;
+                                   rdfs:subPropertyOf owl:topDataProperty ;
                                    rdfs:range xsd:string .
 
 
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#assetNumShare
-untitled-ontology-25:assetNumShare rdf:type owl:DatatypeProperty ;
-                                   rdfs:domain untitled-ontology-25:Asset ;
-                                   rdfs:range xsd:positiveInteger .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#dataEndurantFeature
-untitled-ontology-25:dataEndurantFeature rdf:type owl:DatatypeProperty ,
-                                                  owl:FunctionalProperty ;
-                                         rdfs:domain untitled-ontology-25:Asset ;
-                                         rdfs:range xsd:string .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#dataPerdurantFeature
-untitled-ontology-25:dataPerdurantFeature rdf:type owl:DatatypeProperty .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#numOfShares
-untitled-ontology-25:numOfShares rdf:type owl:DatatypeProperty ;
-                                 rdfs:subPropertyOf untitled-ontology-25:dataPerdurantFeature ;
-                                 rdfs:domain untitled-ontology-25:Asset ;
-                                 rdfs:range xsd:string .
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#numOfShare
+untitled-ontology-25:numOfShare rdf:type owl:DatatypeProperty ;
+                                rdfs:range xsd:positiveInteger ;
+                                rdfs:comment "remove or check it it's equal to the output of creat tx" .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#numShare
 untitled-ontology-25:numShare rdf:type owl:DatatypeProperty ;
-                              rdfs:domain untitled-ontology-25:TxnOuput ;
-                              rdfs:range xsd:nonNegativeInteger .
+                              rdfs:domain untitled-ontology-25:TxnOuput ,
+                                          [ owl:intersectionOf ( untitled-ontology-25:NonTransferringTxn
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty untitled-ontology-25:numShare ;
+                                                                   owl:cardinality "0"^^xsd:nonNegativeInteger
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ;
+                              rdfs:range xsd:positiveInteger .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#opName
-untitled-ontology-25:opName rdf:type owl:DatatypeProperty ;
-                            rdfs:domain untitled-ontology-25:MKTxn ;
-                            rdfs:range xsd:string .
+untitled-ontology-25:opName rdf:type owl:DatatypeProperty .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#privateKey
@@ -205,8 +229,7 @@ untitled-ontology-25:sigHash rdf:type owl:DatatypeProperty ,
 untitled-ontology-25:txnId rdf:type owl:DatatypeProperty ;
                            rdfs:subPropertyOf owl:topDataProperty ;
                            rdf:type owl:FunctionalProperty ;
-                           rdfs:domain untitled-ontology-25:MKTxn ;
-                           rdfs:range xsd:string .
+                           rdfs:range xsd:int .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#txnInputId
@@ -256,7 +279,17 @@ untitled-ontology-25:Bid rdf:type owl:Class ;
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Buy
 untitled-ontology-25:Buy rdf:type owl:Class ;
                          rdfs:subClassOf untitled-ontology-25:NestedTxn ,
-                                         untitled-ontology-25:TransferringTxn .
+                                         untitled-ontology-25:TransferringTxn ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty untitled-ontology-25:hasInput ;
+                                           owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                           owl:onClass untitled-ontology-25:TxnInput
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty untitled-ontology-25:hasOutput ;
+                                           owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                           owl:onClass untitled-ontology-25:TxnOuput
+                                         ] .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Condition
@@ -266,13 +299,18 @@ untitled-ontology-25:Condition rdf:type owl:Class .
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Create
 untitled-ontology-25:Create rdf:type owl:Class ;
                             rdfs:subClassOf untitled-ontology-25:NonTransferringTxn ,
-                                            untitled-ontology-25:SimpleTxn .
+                                            untitled-ontology-25:SimpleTxn ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty untitled-ontology-25:hasInput ;
+                                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                              owl:onClass untitled-ontology-25:TxnInput
+                                            ] .
 
 
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Delete
-untitled-ontology-25:Delete rdf:type owl:Class ;
-                            rdfs:subClassOf untitled-ontology-25:NonTransferringTxn ,
-                                            untitled-ontology-25:SimpleTxn .
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Destroy
+untitled-ontology-25:Destroy rdf:type owl:Class ;
+                             rdfs:subClassOf untitled-ontology-25:NonTransferringTxn ,
+                                             untitled-ontology-25:SimpleTxn .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#FungibleAsset
@@ -282,11 +320,18 @@ untitled-ontology-25:FungibleAsset rdf:type owl:Class ;
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#MKTxn
 untitled-ontology-25:MKTxn rdf:type owl:Class ;
-                           owl:equivalentClass [ rdf:type owl:Restriction ;
-                                                 owl:onProperty untitled-ontology-25:opName ;
-                                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                 owl:onDataRange xsd:string
-                                               ] .
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty untitled-ontology-25:hasAsset ;
+                                             owl:someValuesFrom untitled-ontology-25:Asset
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty untitled-ontology-25:hasInput ;
+                                             owl:someValuesFrom untitled-ontology-25:TxnInput
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty untitled-ontology-25:hasOutput ;
+                                             owl:someValuesFrom untitled-ontology-25:TxnOuput
+                                           ] .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#NestedTxn
@@ -312,14 +357,6 @@ untitled-ontology-25:Offer rdf:type owl:Class ;
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#PromiseTxn
 untitled-ontology-25:PromiseTxn rdf:type owl:Class ;
-                                owl:equivalentClass [ owl:intersectionOf ( untitled-ontology-25:PromiseTxn
-                                                                           [ rdf:type owl:Restriction ;
-                                                                             owl:onProperty untitled-ontology-25:hasOutput ;
-                                                                             owl:someValuesFrom untitled-ontology-25:TxnOuput
-                                                                           ]
-                                                                         ) ;
-                                                      rdf:type owl:Class
-                                                    ] ;
                                 rdfs:subClassOf untitled-ontology-25:MKTxn .
 
 
@@ -335,8 +372,8 @@ untitled-ontology-25:Request rdf:type owl:Class ;
                                              untitled-ontology-25:SimpleTxn .
 
 
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Retrun
-untitled-ontology-25:Retrun rdf:type owl:Class ;
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Return
+untitled-ontology-25:Return rdf:type owl:Class ;
                             rdfs:subClassOf untitled-ontology-25:SimpleTxn ,
                                             untitled-ontology-25:TransferringTxn .
 
@@ -363,11 +400,11 @@ untitled-ontology-25:Transfer rdf:type owl:Class ;
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#TransferringTxn
 untitled-ontology-25:TransferringTxn rdf:type owl:Class ;
-                                     owl:equivalentClass [ rdf:type owl:Restriction ;
-                                                           owl:onProperty untitled-ontology-25:hasOutput ;
-                                                           owl:someValuesFrom untitled-ontology-25:TxnOuput
-                                                         ] ;
-                                     rdfs:subClassOf untitled-ontology-25:MKTxn .
+                                     rdfs:subClassOf untitled-ontology-25:MKTxn ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty untitled-ontology-25:hasOutput ;
+                                                       owl:someValuesFrom untitled-ontology-25:TxnOuput
+                                                     ] .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#TxnInput
@@ -394,123 +431,123 @@ untitled-ontology-25:Withdraw rdf:type owl:Class ;
 
 
 #################################################################
-#    Individuals
+#    Rules
 #################################################################
 
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Acc1
-untitled-ontology-25:Acc1 rdf:type owl:NamedIndividual ,
-                                   untitled-ontology-25:UserAccount ;
-                          untitled-ontology-25:privateKey "\"Acc1PrivateKey\"" ;
-                          untitled-ontology-25:publicKey "\"Acc1PublicKey\"" .
+untitled-ontology-25:x rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
+untitled-ontology-25:ix1 rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Acc2
-untitled-ontology-25:Acc2 rdf:type owl:NamedIndividual ,
-                                   untitled-ontology-25:UserAccount ;
-                          untitled-ontology-25:privateKey "\"Acc2PrivateKey\"" ;
-                          untitled-ontology-25:publicKey "\"Acc2PublicKey\"" .
+untitled-ontology-25:ix2 rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
+untitled-ontology-25:ox1 rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Acc3
-untitled-ontology-25:Acc3 rdf:type owl:NamedIndividual ,
-                                   untitled-ontology-25:UserAccount ;
-                          untitled-ontology-25:privateKey "\"Acc3PivateKey\"" ;
-                          untitled-ontology-25:publicKey "\"Acc3PublicKey\"" .
+untitled-ontology-25:ox2 rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
+untitled-ontology-25:y rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#AdAsset1
-untitled-ontology-25:AdAsset1 rdf:type owl:NamedIndividual ,
-                                       untitled-ontology-25:NonFungibleAsset .
+untitled-ontology-25:z rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
 
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Buy1
-untitled-ontology-25:Buy1 rdf:type owl:NamedIndividual ,
-                                   untitled-ontology-25:Buy ;
-                          untitled-ontology-25:hasInput untitled-ontology-25:Input1 ,
-                                                        untitled-ontology-25:Input2 ;
-                          untitled-ontology-25:hasOutput untitled-ontology-25:output1 ,
-                                                         untitled-ontology-25:output2.2 .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Car1
-untitled-ontology-25:Car1 rdf:type owl:NamedIndividual ,
-                                   untitled-ontology-25:NonFungibleAsset .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Input1
-untitled-ontology-25:Input1 rdf:type owl:NamedIndividual ,
-                                     untitled-ontology-25:TxnInput ;
-                            untitled-ontology-25:sender untitled-ontology-25:Acc1 ,
-                                                        untitled-ontology-25:Acc2 ;
-                            untitled-ontology-25:spends untitled-ontology-25:Car1 .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Input2
-untitled-ontology-25:Input2 rdf:type owl:NamedIndividual ,
-                                     untitled-ontology-25:TxnInput ;
-                            untitled-ontology-25:sender untitled-ontology-25:Acc3 ;
-                            untitled-ontology-25:spends untitled-ontology-25:Token1 .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Sig1
-untitled-ontology-25:Sig1 rdf:type owl:NamedIndividual ,
-                                   untitled-ontology-25:Signature .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Sig2
-untitled-ontology-25:Sig2 rdf:type owl:NamedIndividual ,
-                                   untitled-ontology-25:Signature .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Token1
-untitled-ontology-25:Token1 rdf:type owl:NamedIndividual ,
-                                     untitled-ontology-25:FungibleAsset .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#ad1
-untitled-ontology-25:ad1 rdf:type owl:NamedIndividual ,
-                                  untitled-ontology-25:Advertise ;
-                         untitled-ontology-25:hasAsset untitled-ontology-25:AdAsset1 .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#output1
-untitled-ontology-25:output1 rdf:type owl:NamedIndividual ,
-                                      untitled-ontology-25:TxnOuput ;
-                             untitled-ontology-25:distributes untitled-ontology-25:Car1 ;
-                             untitled-ontology-25:receiver untitled-ontology-25:Acc3 .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#output2.1
-untitled-ontology-25:output2.1 rdf:type owl:NamedIndividual ,
-                                        untitled-ontology-25:TxnOuput ;
-                               untitled-ontology-25:distributes untitled-ontology-25:Token1 ;
-                               untitled-ontology-25:receiver untitled-ontology-25:Acc1 ,
-                                                             untitled-ontology-25:Acc2 .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#output2.2
-untitled-ontology-25:output2.2 rdf:type owl:NamedIndividual ,
-                                        untitled-ontology-25:TxnOuput ;
-                               untitled-ontology-25:distributes untitled-ontology-25:Token1 ;
-                               untitled-ontology-25:receiver untitled-ontology-25:Acc3 .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#transfer1
-untitled-ontology-25:transfer1 rdf:type owl:NamedIndividual ,
-                                        untitled-ontology-25:Transfer ;
-                               untitled-ontology-25:hasInput untitled-ontology-25:Input1 ;
-                               untitled-ontology-25:hasOutput untitled-ontology-25:output1 .
-
-
-###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#transfer2
-untitled-ontology-25:transfer2 rdf:type owl:NamedIndividual ,
-                                        untitled-ontology-25:Transfer ;
-                               untitled-ontology-25:hasInput untitled-ontology-25:Input2 ;
-                               untitled-ontology-25:hasOutput untitled-ontology-25:output2.1 ,
-                                                              untitled-ontology-25:output2.2 .
-
-
-[ untitled-ontology-25:numOfShares ""
-] .
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S1" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> untitled-ontology-25:NestedTxn ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> untitled-ontology-25:x
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> untitled-ontology-25:hasInput ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> untitled-ontology-25:x ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> untitled-ontology-25:ix1
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> untitled-ontology-25:hasInput ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> untitled-ontology-25:x ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> untitled-ontology-25:ix2
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> untitled-ontology-25:hasOutput ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> untitled-ontology-25:x ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> untitled-ontology-25:ox1
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> untitled-ontology-25:hasOutput ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> untitled-ontology-25:x ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> untitled-ontology-25:ox2
+                                                                                                 ] ;
+                                                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#classPredicate> untitled-ontology-25:Transfer ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument1> untitled-ontology-25:y
+                                                                                                            ] ;
+                                                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#propertyPredicate> untitled-ontology-25:hasOutput ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument1> untitled-ontology-25:y ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument2> untitled-ontology-25:ox2
+                                                                                                                       ] ;
+                                                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#propertyPredicate> untitled-ontology-25:hasInput ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> untitled-ontology-25:y ;
+                                                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> untitled-ontology-25:ix1
+                                                                                                                                  ] ;
+                                                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#classPredicate> untitled-ontology-25:Transfer ;
+                                                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> untitled-ontology-25:z
+                                                                                                                                             ] ;
+                                                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#propertyPredicate> untitled-ontology-25:hasOutput ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument1> untitled-ontology-25:z ;
+                                                                                                                                                          <http://www.w3.org/2003/11/swrl#argument2> untitled-ontology-25:ox1
+                                                                                                                                                        ] ;
+                                                                                                                                              rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                         rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#propertyPredicate> untitled-ontology-25:hasInput ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#argument1> untitled-ontology-25:z ;
+                                                                                                                                                                     <http://www.w3.org/2003/11/swrl#argument2> untitled-ontology-25:ix2
+                                                                                                                                                                   ] ;
+                                                                                                                                                         rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                    rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#propertyPredicate> untitled-ontology-25:childTxn ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#argument1> untitled-ontology-25:x ;
+                                                                                                                                                                                <http://www.w3.org/2003/11/swrl#argument2> untitled-ontology-25:y
+                                                                                                                                                                              ] ;
+                                                                                                                                                                    rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                                                                                                               rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#propertyPredicate> untitled-ontology-25:childTxn ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument1> untitled-ontology-25:x ;
+                                                                                                                                                                                           <http://www.w3.org/2003/11/swrl#argument2> untitled-ontology-25:z
+                                                                                                                                                                                         ] ;
+                                                                                                                                                                               rdf:rest rdf:nil
+                                                                                                                                                                             ]
+                                                                                                                                                                  ]
+                                                                                                                                                       ]
+                                                                                                                                            ]
+                                                                                                                                 ]
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                                ]
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> untitled-ontology-25:Buy ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> untitled-ontology-25:x
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
 
 ###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi

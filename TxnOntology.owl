@@ -43,16 +43,7 @@ untitled-ontology-25:hasAsset rdf:type owl:ObjectProperty ;
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#hasInput
 untitled-ontology-25:hasInput rdf:type owl:ObjectProperty ;
-                              rdfs:domain untitled-ontology-25:MKTxn ,
-                                          [ owl:intersectionOf ( untitled-ontology-25:Create
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty untitled-ontology-25:hasInput ;
-                                                                   owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                   owl:onClass untitled-ontology-25:TxnInput
-                                                                 ]
-                                                               ) ;
-                                            rdf:type owl:Class
-                                          ] ;
+                              rdfs:domain untitled-ontology-25:MKTxn ;
                               rdfs:range untitled-ontology-25:TxnInput .
 
 
@@ -65,15 +56,7 @@ untitled-ontology-25:hasOutput rdf:type owl:ObjectProperty ;
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#hasSig
 untitled-ontology-25:hasSig rdf:type owl:ObjectProperty ,
                                      owl:FunctionalProperty ;
-                            rdfs:domain [ owl:intersectionOf ( untitled-ontology-25:TxnInput
-                                                               [ rdf:type owl:Restriction ;
-                                                                 owl:onProperty untitled-ontology-25:hasSig ;
-                                                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-                                                                 owl:onClass untitled-ontology-25:Signature
-                                                               ]
-                                                             ) ;
-                                          rdf:type owl:Class
-                                        ] ;
+                            rdfs:domain untitled-ontology-25:TxnInput ;
                             rdfs:range untitled-ontology-25:Signature .
 
 
@@ -106,41 +89,19 @@ untitled-ontology-25:outputCond rdf:type owl:ObjectProperty ;
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#receiver
 untitled-ontology-25:receiver rdf:type owl:ObjectProperty ;
-                              rdfs:domain [ owl:intersectionOf ( untitled-ontology-25:TxnOuput
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty untitled-ontology-25:receiver ;
-                                                                   owl:someValuesFrom untitled-ontology-25:Account
-                                                                 ]
-                                                               ) ;
-                                            rdf:type owl:Class
-                                          ] ;
+                              rdfs:domain untitled-ontology-25:TxnOuput ;
                               rdfs:range untitled-ontology-25:Account .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#refTxn
 untitled-ontology-25:refTxn rdf:type owl:ObjectProperty ;
-                            rdfs:domain untitled-ontology-25:MKTxn ,
-                                        [ owl:intersectionOf ( untitled-ontology-25:Buy
-                                                               [ rdf:type owl:Restriction ;
-                                                                 owl:onProperty untitled-ontology-25:refTxn ;
-                                                                 owl:someValuesFrom untitled-ontology-25:Advertise
-                                                               ]
-                                                             ) ;
-                                          rdf:type owl:Class
-                                        ] ;
+                            rdfs:domain untitled-ontology-25:MKTxn ;
                             rdfs:range untitled-ontology-25:MKTxn .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#sender
 untitled-ontology-25:sender rdf:type owl:ObjectProperty ;
-                            rdfs:domain [ owl:intersectionOf ( untitled-ontology-25:TxnInput
-                                                               [ rdf:type owl:Restriction ;
-                                                                 owl:onProperty untitled-ontology-25:sender ;
-                                                                 owl:someValuesFrom untitled-ontology-25:Account
-                                                               ]
-                                                             ) ;
-                                          rdf:type owl:Class
-                                        ] ;
+                            rdfs:domain untitled-ontology-25:TxnInput ;
                             rdfs:range untitled-ontology-25:Account .
 
 
@@ -171,6 +132,7 @@ untitled-ontology-25:spends rdf:type owl:ObjectProperty ;
 untitled-ontology-25:assetId rdf:type owl:DatatypeProperty ;
                              rdfs:subPropertyOf owl:topDataProperty ;
                              rdf:type owl:FunctionalProperty ;
+                             rdfs:domain untitled-ontology-25:Asset ;
                              rdfs:range xsd:int .
 
 
@@ -188,20 +150,14 @@ untitled-ontology-25:numOfShare rdf:type owl:DatatypeProperty ;
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#numShare
 untitled-ontology-25:numShare rdf:type owl:DatatypeProperty ;
-                              rdfs:domain untitled-ontology-25:TxnOuput ,
-                                          [ owl:intersectionOf ( untitled-ontology-25:NonTransferringTxn
-                                                                 [ rdf:type owl:Restriction ;
-                                                                   owl:onProperty untitled-ontology-25:numShare ;
-                                                                   owl:cardinality "0"^^xsd:nonNegativeInteger
-                                                                 ]
-                                                               ) ;
-                                            rdf:type owl:Class
-                                          ] ;
-                              rdfs:range xsd:positiveInteger .
+                              rdfs:domain untitled-ontology-25:TxnOuput ;
+                              rdfs:range xsd:nonNegativeInteger .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#opName
-untitled-ontology-25:opName rdf:type owl:DatatypeProperty .
+untitled-ontology-25:opName rdf:type owl:DatatypeProperty ;
+                            rdfs:domain untitled-ontology-25:MKTxn ;
+                            rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#privateKey
@@ -229,6 +185,7 @@ untitled-ontology-25:sigHash rdf:type owl:DatatypeProperty ,
 untitled-ontology-25:txnId rdf:type owl:DatatypeProperty ;
                            rdfs:subPropertyOf owl:topDataProperty ;
                            rdf:type owl:FunctionalProperty ;
+                           rdfs:domain untitled-ontology-25:MKTxn ;
                            rdfs:range xsd:int .
 
 
@@ -263,7 +220,11 @@ untitled-ontology-25:Account rdf:type owl:Class .
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Advertise
 untitled-ontology-25:Advertise rdf:type owl:Class ;
                                rdfs:subClassOf untitled-ontology-25:NonTransferringTxn ,
-                                               untitled-ontology-25:SimpleTxn .
+                                               untitled-ontology-25:SimpleTxn ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty untitled-ontology-25:refTxn ;
+                                                 owl:someValuesFrom untitled-ontology-25:Create
+                                               ] .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#Asset
@@ -280,6 +241,10 @@ untitled-ontology-25:Bid rdf:type owl:Class ;
 untitled-ontology-25:Buy rdf:type owl:Class ;
                          rdfs:subClassOf untitled-ontology-25:NestedTxn ,
                                          untitled-ontology-25:TransferringTxn ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty untitled-ontology-25:refTxn ;
+                                           owl:someValuesFrom untitled-ontology-25:Advertise
+                                         ] ,
                                          [ rdf:type owl:Restriction ;
                                            owl:onProperty untitled-ontology-25:hasInput ;
                                            owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
@@ -408,11 +373,24 @@ untitled-ontology-25:TransferringTxn rdf:type owl:Class ;
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#TxnInput
-untitled-ontology-25:TxnInput rdf:type owl:Class .
+untitled-ontology-25:TxnInput rdf:type owl:Class ;
+                              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                owl:onProperty untitled-ontology-25:sender ;
+                                                owl:someValuesFrom untitled-ontology-25:Account
+                                              ] ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty untitled-ontology-25:hasSig ;
+                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                owl:onClass untitled-ontology-25:Signature
+                                              ] .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#TxnOuput
-untitled-ontology-25:TxnOuput rdf:type owl:Class .
+untitled-ontology-25:TxnOuput rdf:type owl:Class ;
+                              rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                owl:onProperty untitled-ontology-25:receiver ;
+                                                owl:someValuesFrom untitled-ontology-25:Account
+                                              ] .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#TxnWorkflow
@@ -428,6 +406,114 @@ untitled-ontology-25:UserAccount rdf:type owl:Class ;
 untitled-ontology-25:Withdraw rdf:type owl:Class ;
                               rdfs:subClassOf untitled-ontology-25:SimpleTxn ,
                                               untitled-ontology-25:TransferringTxn .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#advIn2
+:advIn2 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/DMO#advOut2
+:advOut2 rdf:type owl:NamedIndividual ;
+         untitled-ontology-25:numShare 0 .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#acc1
+untitled-ontology-25:acc1 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#adv1
+untitled-ontology-25:adv1 rdf:type owl:NamedIndividual ;
+                          untitled-ontology-25:hasAsset untitled-ontology-25:advAsset1 ;
+                          untitled-ontology-25:hasOutput untitled-ontology-25:createOut ;
+                          untitled-ontology-25:refTxn untitled-ontology-25:create1 .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#adv2
+untitled-ontology-25:adv2 rdf:type owl:NamedIndividual ;
+                          untitled-ontology-25:hasAsset untitled-ontology-25:advAsset2 ;
+                          untitled-ontology-25:hasInput :advIn2 ;
+                          untitled-ontology-25:hasOutput :advOut2 .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#advAsset1
+untitled-ontology-25:advAsset1 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#advAsset2
+untitled-ontology-25:advAsset2 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#asset1
+untitled-ontology-25:asset1 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#assetNull
+untitled-ontology-25:assetNull rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#buy1
+untitled-ontology-25:buy1 rdf:type owl:NamedIndividual ;
+                          untitled-ontology-25:hasInput untitled-ontology-25:buyIn1 ,
+                                                        untitled-ontology-25:buyIn2 ;
+                          untitled-ontology-25:hasOutput untitled-ontology-25:buyOut1 ,
+                                                         untitled-ontology-25:buyOut2 ;
+                          untitled-ontology-25:refTxn untitled-ontology-25:adv1 .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#buyAsset1
+untitled-ontology-25:buyAsset1 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#buyIn1
+untitled-ontology-25:buyIn1 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#buyIn2
+untitled-ontology-25:buyIn2 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#buyOut1
+untitled-ontology-25:buyOut1 rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#buyOut2
+untitled-ontology-25:buyOut2 rdf:type owl:NamedIndividual ;
+                             untitled-ontology-25:hasAsset untitled-ontology-25:buyAsset1 .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#create1
+untitled-ontology-25:create1 rdf:type owl:NamedIndividual ;
+                             untitled-ontology-25:hasAsset untitled-ontology-25:assetNull ;
+                             untitled-ontology-25:hasInput untitled-ontology-25:createIn ;
+                             untitled-ontology-25:hasOutput untitled-ontology-25:createOut ;
+                             untitled-ontology-25:msgTxn untitled-ontology-25:sig2 .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#createIn
+untitled-ontology-25:createIn rdf:type owl:NamedIndividual ;
+                              untitled-ontology-25:hasSig untitled-ontology-25:sig1 ;
+                              untitled-ontology-25:sender untitled-ontology-25:acc1 .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#createOut
+untitled-ontology-25:createOut rdf:type owl:NamedIndividual ;
+                               untitled-ontology-25:distributes untitled-ontology-25:asset1 ;
+                               untitled-ontology-25:receiver untitled-ontology-25:acc1 ;
+                               untitled-ontology-25:numShare 0 .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#sig1
+untitled-ontology-25:sig1 rdf:type owl:NamedIndividual ;
+                          untitled-ontology-25:sigGeneratedBy untitled-ontology-25:acc1 .
+
+
+###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#sig2
+untitled-ontology-25:sig2 rdf:type owl:NamedIndividual ;
+                          untitled-ontology-25:sigGeneratedBy untitled-ontology-25:acc1 .
 
 
 #################################################################

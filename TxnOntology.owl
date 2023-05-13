@@ -390,6 +390,11 @@ untitled-ontology-25:TxnOuput rdf:type owl:Class ;
                               rdfs:subClassOf [ rdf:type owl:Restriction ;
                                                 owl:onProperty untitled-ontology-25:receiver ;
                                                 owl:someValuesFrom untitled-ontology-25:Account
+                                              ] ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty untitled-ontology-25:opName ;
+                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                owl:onDataRange xsd:string
                                               ] .
 
 
@@ -426,17 +431,21 @@ untitled-ontology-25:acc1 rdf:type owl:NamedIndividual .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#adv1
-untitled-ontology-25:adv1 rdf:type owl:NamedIndividual ;
+untitled-ontology-25:adv1 rdf:type owl:NamedIndividual ,
+                                   untitled-ontology-25:Advertise ;
                           untitled-ontology-25:hasAsset untitled-ontology-25:advAsset1 ;
                           untitled-ontology-25:hasOutput untitled-ontology-25:createOut ;
-                          untitled-ontology-25:refTxn untitled-ontology-25:create1 .
+                          untitled-ontology-25:refTxn untitled-ontology-25:create1 ;
+                          untitled-ontology-25:opName "\"advertise\"" .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#adv2
-untitled-ontology-25:adv2 rdf:type owl:NamedIndividual ;
+untitled-ontology-25:adv2 rdf:type owl:NamedIndividual ,
+                                   untitled-ontology-25:Advertise ;
                           untitled-ontology-25:hasAsset untitled-ontology-25:advAsset2 ;
                           untitled-ontology-25:hasInput :advIn2 ;
-                          untitled-ontology-25:hasOutput :advOut2 .
+                          untitled-ontology-25:hasOutput :advOut2 ;
+                          untitled-ontology-25:opName "\"advertise\"" .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#advAsset1
@@ -456,12 +465,15 @@ untitled-ontology-25:assetNull rdf:type owl:NamedIndividual .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#buy1
-untitled-ontology-25:buy1 rdf:type owl:NamedIndividual ;
+untitled-ontology-25:buy1 rdf:type owl:NamedIndividual ,
+                                   untitled-ontology-25:Buy ;
                           untitled-ontology-25:hasInput untitled-ontology-25:buyIn1 ,
                                                         untitled-ontology-25:buyIn2 ;
                           untitled-ontology-25:hasOutput untitled-ontology-25:buyOut1 ,
                                                          untitled-ontology-25:buyOut2 ;
-                          untitled-ontology-25:refTxn untitled-ontology-25:adv1 .
+                          untitled-ontology-25:refTxn untitled-ontology-25:adv1 ;
+                          untitled-ontology-25:opName "\"buy\"" ;
+                          untitled-ontology-25:txnId 1 .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#buyAsset1
@@ -486,11 +498,13 @@ untitled-ontology-25:buyOut2 rdf:type owl:NamedIndividual ;
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#create1
-untitled-ontology-25:create1 rdf:type owl:NamedIndividual ;
+untitled-ontology-25:create1 rdf:type owl:NamedIndividual ,
+                                      untitled-ontology-25:Create ;
                              untitled-ontology-25:hasAsset untitled-ontology-25:assetNull ;
                              untitled-ontology-25:hasInput untitled-ontology-25:createIn ;
                              untitled-ontology-25:hasOutput untitled-ontology-25:createOut ;
-                             untitled-ontology-25:msgTxn untitled-ontology-25:sig2 .
+                             untitled-ontology-25:msgTxn untitled-ontology-25:sig2 ;
+                             untitled-ontology-25:opName "\"create\"" .
 
 
 ###  http://www.semanticweb.org/sogol/ontologies/2023/3/untitled-ontology-25#createIn

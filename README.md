@@ -14,4 +14,6 @@ categories of DApps, i.e., decentralized marketplaces. This modeling of
 transactional behavior complements the modeling supported by existing ontologies that focus on the infrastructure layer. We illustrate how
 DeMaTO can be used in blockchain transaction modeling and its value
 with respect to blockchain queryability and transaction validation.
-We plan to make it available using open source license, such as GNU.
+![Image 1](DeMaTO_class_hierarchy.png)
+![Image 2](DeMaTO_obj_data_properties.png)
+

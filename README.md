@@ -2,7 +2,7 @@
 Blockchains are distributed ledger platforms that were originally envisioned for implementing digital assets and cryptocurrencies
 such as Bitcoin. Mainstream blockchain platforms such as Ethereum
 and Hyperledger support both ”native” transactional behavior i.e.,
-transferring cryptocurrency assets, as well as, other types of transactional behavior relevant to an emerging class of applications called decentralized applications or DApps. However, ”non-native” transactional
+transferring cryptocurrency assets, as well as, other types of transactional behavior relevant to an emerging class of applications called decentralized applications or DApps. However, ”non-native” transactional
 behavior is achieved in terms of user-defined programs, commonly referred to as smart contracts. Unfortunately, smart contracts have several
 known limitations including, the burden on both implementor and contract consumers, being prone to financially-costly errors, higher cost of
 execution and overall difficulty with concurrency optimization. Further,
